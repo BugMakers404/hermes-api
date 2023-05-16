@@ -1,0 +1,3 @@
+rootProject.name = 'hermes-api'
+include('hermes-api-main')
+include('hermes-api-vicroad')
