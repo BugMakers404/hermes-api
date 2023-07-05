@@ -3,7 +3,7 @@ plugins {
     id "com.avast.gradle.docker-compose" version "0.16.11"
     id "io.freefair.lombok" version "8.0.1"
     id "io.spring.dependency-management" version "1.1.0"
-    id 'org.springframework.boot' version '3.0.6' apply false
+    id 'org.springframework.boot' version '3.1.1' apply false
 }
 
 allprojects {
@@ -33,7 +33,7 @@ subprojects {
     }
 
     dependencies {
-        implementation platform('org.springframework.boot:spring-boot-dependencies:3.0.6')
+        implementation platform('org.springframework.boot:spring-boot-dependencies:3.1.1')
         implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
 
         testImplementation('org.springframework.boot:spring-boot-starter-test') {
