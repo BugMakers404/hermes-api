@@ -1,29 +1,27 @@
-package org.bugmakers404.hermes.api.vicroad.entity.site;
+package org.bugmakers404.hermes.api.vicroad.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.io.Serializable;
+import java.time.OffsetDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.bugmakers404.hermes.api.vicroad.util.Constants;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.OffsetDateTime;
-import java.util.List;
-import java.util.Objects;
-
 @Slf4j
 @Data
 @AllArgsConstructor
-@RequiredArgsConstructor
+@NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Document(collection = "vicroad.bluetooth.site.info")
+@Document(collection = "vicroad.bluetooth.site.stats")
 @CompoundIndex(name = "siteId_timestamp_idx", def = "{'siteId': 1, 'timestamp': -1}")
-public class SiteInfo {
-
+public class SiteStats implements Serializable {
 
   @Id
   private String id;
@@ -32,22 +30,14 @@ public class SiteInfo {
   private Integer siteId;
 
   @Indexed
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssXXX")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_TIME_PATTERN_IN_EVENTS)
   private OffsetDateTime timestamp;
 
-  private String name;
+  private Integer probeCount;
 
-  private List<Double> location;
+  private Integer rawProbeCount;
 
-  public Boolean isSame(SiteInfo other) {
-    if (this == other) {
-      return true;
-    }
+  private Integer estimatedEventCount;
 
-    if (other == null) {
-      return false;
-    }
-
-    return Objects.equals(name, other.name) && Objects.equals(location, other.location);
-  }
+  private Integer averageDuration;
 }

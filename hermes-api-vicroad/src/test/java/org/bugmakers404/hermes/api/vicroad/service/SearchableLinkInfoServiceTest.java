@@ -7,7 +7,7 @@ import static org.testng.Assert.assertEquals;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import org.bugmakers404.hermes.api.vicroad.dao.LinkInfoDAO;
-import org.bugmakers404.hermes.api.vicroad.entity.link.LinkInfo;
+import org.bugmakers404.hermes.api.vicroad.entity.LinkInfo;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.testng.annotations.BeforeMethod;

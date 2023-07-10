@@ -4,7 +4,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.bugmakers404.hermes.api.vicroad.dao.RouteInfoDAO;
-import org.bugmakers404.hermes.api.vicroad.entity.route.RouteInfo;
+import org.bugmakers404.hermes.api.vicroad.entity.RouteInfo;
 import org.bugmakers404.hermes.api.vicroad.service.interfaces.SearchableRouteInfoService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

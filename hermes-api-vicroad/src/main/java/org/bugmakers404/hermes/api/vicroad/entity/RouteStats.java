@@ -1,28 +1,27 @@
-package org.bugmakers404.hermes.api.vicroad.entity.route;
+package org.bugmakers404.hermes.api.vicroad.entity;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.io.Serializable;
+import java.time.OffsetDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.bugmakers404.hermes.api.vicroad.util.Constants;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.io.Serializable;
-import java.time.OffsetDateTime;
-
 @Slf4j
 @Data
 @AllArgsConstructor
-@RequiredArgsConstructor
+@NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Document(collection = "vicroad.bluetooth.route.events")
+@Document(collection = "vicroad.bluetooth.route.stats")
 @CompoundIndex(name = "routeId_timestamp_idx", def = "{'routeId': 1, 'timestamp': -1}")
-public class RouteEvent implements Serializable {
+public class RouteStats implements Serializable {
 
   @Id
   private String id;
@@ -31,14 +30,17 @@ public class RouteEvent implements Serializable {
   private Integer routeId;
 
   @Indexed
-  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ssXXX")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = Constants.DATE_TIME_PATTERN_IN_EVENTS)
   private OffsetDateTime timestamp;
 
-  private Boolean enabled;
+  private Integer travelTime;
 
-  private Boolean draft;
+  private Integer delay;
 
-  @JsonAlias("latest_stats")
-  private RouteStats latestStats;
+  private Integer speed;
+
+  private Integer excessDelay;
+
+  private String dataStatus;
 }
 

@@ -1,11 +1,13 @@
 package org.bugmakers404.hermes.api.vicroad.service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.bugmakers404.hermes.api.vicroad.dao.LinkInfoDAO;
-import org.bugmakers404.hermes.api.vicroad.entity.link.LinkInfo;
+import org.bugmakers404.hermes.api.vicroad.dao.projection.LinkNameProjection;
+import org.bugmakers404.hermes.api.vicroad.entity.LinkInfo;
 import org.bugmakers404.hermes.api.vicroad.service.interfaces.SearchableLinkInfoService;
 import org.bugmakers404.hermes.api.vicroad.util.Messages;
 import org.springframework.stereotype.Service;
@@ -26,5 +28,10 @@ public class SearchableLinkInfoServiceImpl implements SearchableLinkInfoService 
         .orElseThrow(() -> new NoSuchElementException(
             Messages.LATEST_LINK_INFO_DOES_NOT_EXIST.format(linkId)
         ));
+  }
+
+  @Override
+  public List<LinkNameProjection> getAllDistinctLinkNames() {
+    return linkInfoDAO.findDistinctByName();
   }
 }
