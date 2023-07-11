@@ -1,9 +1,7 @@
 package org.bugmakers404.hermes.api.vicroad.controller;
 
-import static org.bugmakers404.hermes.api.vicroad.util.RestfulEndpointConfig.VICROAD_LINK_EVENT;
-import static org.bugmakers404.hermes.api.vicroad.util.RestfulEndpointConfig.VICROAD_LINK_EVENT_ON_TIMESTAMP;
-import static org.bugmakers404.hermes.api.vicroad.util.RestfulEndpointConfig.VICROAD_LINK_INFO;
-import static org.bugmakers404.hermes.api.vicroad.util.RestfulEndpointConfig.VICROAD_LINK_INFO_WITH_ID;
+import static org.bugmakers404.hermes.api.vicroad.util.RestfulEndpoints.VICROAD_LINK_INFO;
+import static org.bugmakers404.hermes.api.vicroad.util.RestfulEndpoints.VICROAD_LINK_INFO_WITH_ID;
 
 import io.swagger.v3.oas.annotations.Operation;
 import java.time.OffsetDateTime;
@@ -15,6 +13,7 @@ import org.bugmakers404.hermes.api.vicroad.entity.LinkInfo;
 import org.bugmakers404.hermes.api.vicroad.entity.LinkStats;
 import org.bugmakers404.hermes.api.vicroad.service.interfaces.SearchableLinkInfoService;
 import org.bugmakers404.hermes.api.vicroad.service.interfaces.SearchableLinkStatsService;
+import org.bugmakers404.hermes.api.vicroad.util.RestfulEndpoints;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,13 +31,13 @@ public class LinkController {
   private final SearchableLinkInfoService linkInfoService;
 
   @Operation(summary = "Get the latest link stats")
-  @GetMapping(path = VICROAD_LINK_EVENT, produces = MediaType.APPLICATION_JSON_VALUE)
-  public LinkStats getLatestLinkEvent(@PathVariable Integer linkId) {
+  @GetMapping(path = RestfulEndpoints.VICROAD_LINK_STATS_WITH_ID, produces = MediaType.APPLICATION_JSON_VALUE)
+  public LinkStats getLatestLinkStats(@PathVariable Integer linkId) {
     return linkEventService.getLatestLinkStats(linkId);
   }
 
   @Operation(summary = "Get the link stats with specific ID and timestamp")
-  @GetMapping(path = VICROAD_LINK_EVENT_ON_TIMESTAMP, produces = MediaType.APPLICATION_JSON_VALUE)
+  @GetMapping(path = RestfulEndpoints.VICROAD_LINK_STATS_WITH_ID_TIMESTAMP, produces = MediaType.APPLICATION_JSON_VALUE)
   public LinkStats getLinkEvent(@PathVariable Integer linkId,
       @PathVariable OffsetDateTime timestamp) {
     return linkEventService.getLinkStats(linkId, timestamp);
